@@ -8,7 +8,8 @@ app = Flask(__name__)
 # Configurações
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///tarefas.db"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config["JWT_SECRET_KEY"] = "sua-chave-secreta-aqui"  # troque em produção!
+import os
+app.config["JWT_SECRET_KEY"] = os.environ.get("JWT_SECRET_KEY", "chave-local-dev")
 
 db = SQLAlchemy(app)
 jwt = JWTManager(app)
